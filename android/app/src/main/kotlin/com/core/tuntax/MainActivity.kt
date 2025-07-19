@@ -1,4 +1,4 @@
-package com.example.tuntax
+package com.core.tuntax
 
 import io.flutter.embedding.android.FlutterActivity
 
