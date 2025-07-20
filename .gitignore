@@ -51,3 +51,7 @@ app.*.map.json
 # Android Signing Files
 upload-keystore.jks
 android/key.properties
+
+# linux build
+/linux/flutter/ephemeral/
+/linux
