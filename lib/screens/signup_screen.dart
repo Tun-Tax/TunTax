@@ -120,7 +120,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       borderRadius: BorderRadius.circular(10),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color(0xFFE4E5E7).withOpacity(0.24),
+                          color: const Color.fromARGB(61, 228, 229, 231),
                           blurRadius: 2,
                           offset: const Offset(0, 1),
                         ),
@@ -129,7 +129,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     child: TextField(
                       decoration: InputDecoration(
                         hintText: 'Patrick Star',
-                        hintStyle: TextStyle(color: Colors.black.withOpacity(0.5)),
+                        hintStyle: TextStyle(color: Color.fromARGB(128, 0, 0, 0)),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide: const BorderSide(color: Color(0xFFE4E5E7), width: 1),
@@ -156,7 +156,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       borderRadius: BorderRadius.circular(10),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color(0xFFE4E5E7).withOpacity(0.24),
+                          color: const Color.fromARGB(61, 228, 229, 231),
                           blurRadius: 2,
                           offset: const Offset(0, 1),
                         ),
@@ -165,7 +165,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     child: TextField(
                       decoration: InputDecoration(
                         hintText: 'patrickst4r@gmail.com',
-                        hintStyle: TextStyle(color: Colors.black.withOpacity(0.5)),
+                        hintStyle: TextStyle(color: Color.fromARGB(128, 0, 0, 0)),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide: const BorderSide(color: Color(0xFFE4E5E7), width: 1),
@@ -192,7 +192,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       borderRadius: BorderRadius.circular(10),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color(0xFFE4E5E7).withOpacity(0.24),
+                          color: const Color.fromARGB(61, 228, 229, 231),
                           blurRadius: 2,
                           offset: const Offset(0, 1),
                         ),
@@ -201,7 +201,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     child: TextField(
                       decoration: InputDecoration(
                         hintText: '18/03/2024',
-                        hintStyle: TextStyle(color: Colors.black.withOpacity(0.5)),
+                        hintStyle: TextStyle(color: Color.fromARGB(128, 0, 0, 0)),
                         suffixIcon: IconButton(
                           icon: const Icon(Icons.calendar_month_outlined),
                           onPressed: () {
@@ -234,7 +234,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       borderRadius: BorderRadius.circular(10),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color(0xFFE4E5E7).withOpacity(0.24),
+                          color: const Color.fromARGB(61, 228, 229, 231),
                           blurRadius: 2,
                           offset: const Offset(0, 1),
                         ),
@@ -243,7 +243,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     child: TextField(
                       decoration: InputDecoration(
                         hintText: '0834400xxxxx',
-                        hintStyle: TextStyle(color: Colors.black.withOpacity(0.5)),
+                        hintStyle: TextStyle(color: Color.fromARGB(128, 0, 0, 0)),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide: const BorderSide(color: Color(0xFFE4E5E7), width: 1),
@@ -270,7 +270,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       borderRadius: BorderRadius.circular(10),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color(0xFFE4E5E7).withOpacity(0.24),
+                          color: const Color.fromARGB(61, 228, 229, 231),
                           blurRadius: 2,
                           offset: const Offset(0, 1),
                         ),
@@ -280,7 +280,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       obscureText: !_isPasswordVisible,
                       decoration: InputDecoration(
                         hintText: '********',
-                        hintStyle: TextStyle(color: Colors.black.withOpacity(0.5)),
+                        hintStyle: TextStyle(color: Color.fromARGB(128, 0, 0, 0)),
                         suffixIcon: IconButton(
                           icon: Icon(
                             _isPasswordVisible
