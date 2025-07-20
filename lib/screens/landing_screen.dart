@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tuntax/screens/signup_screen.dart';
 
 class LandingScreen extends StatelessWidget {
   const LandingScreen({super.key});
@@ -99,7 +100,12 @@ class LandingScreen extends StatelessWidget {
                     : [],
               ),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const SignupScreen()),
+                  );
+                },
                 style: ButtonStyle(
                   padding: WidgetStateProperty.all(
                     EdgeInsets.symmetric(horizontal: 115, vertical: 14),
