@@ -93,7 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         // Google Button
                         OutlinedButton(
                           onPressed: () {
-                            print('Sign in with Google');
+                            debugPrint('Sign in with Google');
                           },
                           style: OutlinedButton.styleFrom(
                             foregroundColor: Colors.black,
@@ -126,7 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         // Facebook Button
                         OutlinedButton(
                           onPressed: () {
-                            print('Sign in with Facebook');
+                            debugPrint('Sign in with Facebook');
                           },
                           style: OutlinedButton.styleFrom(
                             foregroundColor: Colors.black,
@@ -302,7 +302,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             TextButton(
                               onPressed: () {
-                                print('Forgot Password');
+                                debugPrint('Forgot Password');
                               },
                               child: Text(
                                 'Lupa kata sandi?',
@@ -320,14 +320,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           onPressed: () {
                             if (_formKey.currentState?.saveAndValidate() ??
                                 false) {
-                              print(
+                              debugPrint(
                                 'Email: ${_formKey.currentState?.fields['email']?.value}',
                               );
-                              print(
+                              debugPrint(
                                 'Password: ${_formKey.currentState?.fields['password']?.value}',
                               );
-                              print('Remember Me: $_rememberMe');
-                              print('Login button pressed');
+                              debugPrint('Remember Me: $_rememberMe');
+                              debugPrint('Login button pressed');
                             }
                           },
                           style: ElevatedButton.styleFrom(

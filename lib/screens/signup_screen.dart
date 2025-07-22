@@ -426,13 +426,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             ],
                           ),
                           child: ElevatedButton(
-                            onPressed: () {
-                              if (_formKey.currentState?.saveAndValidate() ??
-                                  false) {
-                                final data = _formKey.currentState?.value;
-                              }
-                              // TODO: Implement signup logic
-                            },
+                            onPressed: () {},
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.transparent,
                               shadowColor: Colors.transparent,
