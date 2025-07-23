@@ -22,8 +22,8 @@ class CustomNavBar extends StatelessWidget {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              const Color(0xFF4983F6),
-              const Color(0xFFC175F5),
+              HSLColor.fromColor(const Color(0xFF4983F6)).withLightness(0.95).toColor(),
+              HSLColor.fromColor(const Color(0xFFC175F5)).withLightness(0.95).toColor(),
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
