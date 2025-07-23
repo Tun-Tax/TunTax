@@ -18,13 +18,27 @@ class CustomNavBar extends StatelessWidget {
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
       ),
-      child: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        items: _navBarItems(),
-        currentIndex: currentIndex,
-        onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              const Color(0xFF4983F6),
+              const Color(0xFFC175F5),
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: BottomNavigationBar(
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          type: BottomNavigationBarType.fixed,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          items: _navBarItems(),
+          currentIndex: currentIndex,
+          onTap: onTap,
+        ),
       ),
     );
   }
