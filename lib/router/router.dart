@@ -8,7 +8,6 @@ import 'package:tuntax/screens/main/home_screen.dart';
 import 'package:tuntax/screens/main/search_screen.dart';
 import 'package:tuntax/screens/main/transactions_screen.dart';
 import 'package:tuntax/screens/signup_screen.dart';
-import 'package:tuntax/utils/page_transitions.dart';
 import 'package:tuntax/widgets/scaffold_with_nav_bar.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -20,25 +19,22 @@ final router = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      pageBuilder: (context, state) => buildPageWithPlatformTransition(
-        context: context,
-        state: state,
+      pageBuilder: (context, state) => MaterialPage(
+        key: state.pageKey,
         child: const LandingScreen(),
       ),
     ),
     GoRoute(
       path: '/login',
-      pageBuilder: (context, state) => buildPageWithPlatformTransition(
-        context: context,
-        state: state,
+      pageBuilder: (context, state) => MaterialPage(
+        key: state.pageKey,
         child: const LoginScreen(),
       ),
     ),
     GoRoute(
       path: '/signup',
-      pageBuilder: (context, state) => buildPageWithPlatformTransition(
-        context: context,
-        state: state,
+      pageBuilder: (context, state) => MaterialPage(
+        key: state.pageKey,
         child: const SignupScreen(),
       ),
     ),
