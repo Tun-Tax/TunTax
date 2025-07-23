@@ -433,9 +433,9 @@ class _SignupScreenState extends State<SignupScreen> {
                               ),
                               child: ElevatedButton(
                                 onPressed: () {
-                                  if (_formKey.currentState?.saveAndValidate() ?? false) {
+                                  //if (_formKey.currentState?.saveAndValidate() ?? false) {
                                     context.go('/home');
-                                  }
+                                  //}
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.transparent,
