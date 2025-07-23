@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomNavBar extends StatelessWidget {
   final int currentIndex;
@@ -14,25 +15,27 @@ class CustomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
-      items: const <BottomNavigationBarItem>[
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
+      items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-          icon: Icon(Icons.home),
+          icon: SvgPicture.asset('assets/svgs/home.svg'),
           label: 'Home',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.swap_horiz),
+          icon: SvgPicture.asset('assets/svgs/file_text.svg'),
           label: 'Transactions',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.chat),
+          icon: Image.asset('assets/images/navbar-logo.png'),
           label: 'Chat',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.search),
+          icon: SvgPicture.asset('assets/svgs/search_person.svg'),
           label: 'Search',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.person),
+          icon: SvgPicture.asset('assets/svgs/person.svg'),
           label: 'Account',
         ),
       ],
