@@ -1,19 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tuntax/screens/landing_screen.dart';
+import 'package:tuntax/screens/login_screen.dart';
 import 'package:tuntax/screens/main/account_screen.dart';
 import 'package:tuntax/screens/main/chat_screen.dart';
 import 'package:tuntax/screens/main/home_screen.dart';
 import 'package:tuntax/screens/main/search_screen.dart';
 import 'package:tuntax/screens/main/transactions_screen.dart';
+import 'package:tuntax/screens/signup_screen.dart';
+import 'package:tuntax/utils/page_transitions.dart';
 import 'package:tuntax/widgets/scaffold_with_nav_bar.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellNavigatorKey = GlobalKey<NavigatorState>();
 
 final router = GoRouter(
-  initialLocation: '/home',
+  initialLocation: '/',
   navigatorKey: _rootNavigatorKey,
   routes: [
+    GoRoute(
+      path: '/',
+      pageBuilder: (context, state) => buildPageWithPlatformTransition(
+        context: context,
+        state: state,
+        child: const LandingScreen(),
+      ),
+    ),
+    GoRoute(
+      path: '/login',
+      pageBuilder: (context, state) => buildPageWithPlatformTransition(
+        context: context,
+        state: state,
+        child: const LoginScreen(),
+      ),
+    ),
+    GoRoute(
+      path: '/signup',
+      pageBuilder: (context, state) => buildPageWithPlatformTransition(
+        context: context,
+        state: state,
+        child: const SignupScreen(),
+      ),
+    ),
     ShellRoute(
       navigatorKey: _shellNavigatorKey,
       builder: (context, state, child) {
