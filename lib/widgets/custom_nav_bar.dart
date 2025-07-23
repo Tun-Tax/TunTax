@@ -55,18 +55,28 @@ class CustomNavBar extends StatelessWidget {
     ];
 
     return items.map((item) {
-      final icon = item['isSvg']
-          ? SvgPicture.asset(item['iconPath'])
-          : Image.asset(item['iconPath']);
+      final iconWidget = item['isSvg']
+          ? SvgPicture.asset(
+              item['iconPath'],
+              width: 24, // Fixed width for SVG icons
+              height: 24, // Fixed height for SVG icons
+            )
+          : Image.asset(
+              item['iconPath'],
+              width: 24, // Fixed width for image icons
+              height: 24, // Fixed height for image icons
+            );
       return BottomNavigationBarItem(
-        icon: icon,
+        icon: iconWidget,
         activeIcon: Container(
+          width: 40, // Fixed width for active icon container
+          height: 40, // Fixed height for active icon container
           padding: const EdgeInsets.all(8),
           decoration: const BoxDecoration(
             color: Colors.white,
             shape: BoxShape.circle,
           ),
-          child: icon,
+          child: Center(child: iconWidget), // Center the icon within the container
         ),
         label: item['label'],
       );
