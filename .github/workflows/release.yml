@@ -186,7 +186,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ steps.create_tag.outputs.tag_name }}
-          name: "Release v${{ steps.pubspec.outputs.full_version }}"
+          name: "v${{ steps.pubspec.outputs.semantic_version }}"
           body: ${{ steps.prep_release_body.outputs.body }}
           draft: false
           prerelease: false
