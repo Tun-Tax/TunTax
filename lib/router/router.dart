@@ -9,6 +9,7 @@ import 'package:tuntax/screens/main/search_screen.dart';
 import 'package:tuntax/screens/main/transactions_screen.dart';
 import 'package:tuntax/screens/signup_screen.dart';
 import 'package:tuntax/widgets/scaffold_with_nav_bar.dart';
+import 'package:tuntax/widgets/scaffold_with_app_bar.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellNavigatorKey = GlobalKey<NavigatorState>();
@@ -19,24 +20,18 @@ final router = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      pageBuilder: (context, state) => MaterialPage(
-        key: state.pageKey,
-        child: const LandingScreen(),
-      ),
+      pageBuilder: (context, state) =>
+          MaterialPage(key: state.pageKey, child: const LandingScreen()),
     ),
     GoRoute(
       path: '/login',
-      pageBuilder: (context, state) => MaterialPage(
-        key: state.pageKey,
-        child: const LoginScreen(),
-      ),
+      pageBuilder: (context, state) =>
+          MaterialPage(key: state.pageKey, child: const LoginScreen()),
     ),
     GoRoute(
       path: '/signup',
-      pageBuilder: (context, state) => MaterialPage(
-        key: state.pageKey,
-        child: const SignupScreen(),
-      ),
+      pageBuilder: (context, state) =>
+          MaterialPage(key: state.pageKey, child: const SignupScreen()),
     ),
     ShellRoute(
       navigatorKey: _shellNavigatorKey,
@@ -46,35 +41,48 @@ final router = GoRouter(
       routes: [
         GoRoute(
           path: '/home',
-          pageBuilder: (context, state) => const NoTransitionPage(
-            child: HomeScreen(),
-          ),
+          pageBuilder: (context, state) =>
+              const NoTransitionPage(child: HomeScreen()),
         ),
         GoRoute(
           path: '/transactions',
-          pageBuilder: (context, state) => const NoTransitionPage(
-            child: TransactionsScreen(),
-          ),
+          pageBuilder: (context, state) =>
+              const NoTransitionPage(child: TransactionsScreen()),
         ),
         GoRoute(
           path: '/chat',
-          pageBuilder: (context, state) => const NoTransitionPage(
-            child: ChatScreen(),
-          ),
+          pageBuilder: (context, state) =>
+              const NoTransitionPage(child: ChatScreen()),
         ),
         GoRoute(
           path: '/search',
-          pageBuilder: (context, state) => const NoTransitionPage(
-            child: SearchScreen(),
-          ),
+          pageBuilder: (context, state) =>
+              const NoTransitionPage(child: SearchScreen()),
         ),
         GoRoute(
           path: '/account',
-          pageBuilder: (context, state) => const NoTransitionPage(
-            child: AccountScreen(),
-          ),
+          pageBuilder: (context, state) =>
+              const NoTransitionPage(child: AccountScreen()),
         ),
       ],
+    ),
+    GoRoute(
+      path: '/date',
+      builder: (BuildContext context, GoRouterState state) {
+        return const DateScreen();
+      },
+    ),
+    GoRoute(
+      path: '/notification',
+      builder: (BuildContext context, GoRouterState state) {
+        return const NotificationScreen();
+      },
+    ),
+    GoRoute(
+      path: '/settings',
+      builder: (BuildContext context, GoRouterState state) {
+        return const SettingsScreen();
+      },
     ),
   ],
 );
