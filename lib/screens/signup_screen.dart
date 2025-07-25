@@ -114,7 +114,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                       ),
                                       TextButton(
                                         onPressed: () {
-                                          Navigator.of(context).pop();
+                                          context.go('/login');
                                         },
                                         child: Text(
                                           'Masuk',
@@ -145,7 +145,12 @@ class _SignupScreenState extends State<SignupScreen> {
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: const Color.fromARGB(61, 228, 229, 231),
+                                    color: const Color.fromARGB(
+                                      61,
+                                      228,
+                                      229,
+                                      231,
+                                    ),
                                     blurRadius: 2,
                                     offset: const Offset(0, 1),
                                   ),
@@ -174,11 +179,13 @@ class _SignupScreenState extends State<SignupScreen> {
                                 ),
                                 validator: FormBuilderValidators.compose([
                                   FormBuilderValidators.required(
-                                    errorText: 'Nama lengkap tidak boleh kosong',
+                                    errorText:
+                                        'Nama lengkap tidak boleh kosong',
                                   ),
                                   FormBuilderValidators.minLength(
                                     3,
-                                    errorText: 'Nama lengkap minimal 3 karakter',
+                                    errorText:
+                                        'Nama lengkap minimal 3 karakter',
                                   ),
                                 ]),
                               ),
@@ -198,7 +205,12 @@ class _SignupScreenState extends State<SignupScreen> {
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: const Color.fromARGB(61, 228, 229, 231),
+                                    color: const Color.fromARGB(
+                                      61,
+                                      228,
+                                      229,
+                                      231,
+                                    ),
                                     blurRadius: 2,
                                     offset: const Offset(0, 1),
                                   ),
@@ -250,7 +262,12 @@ class _SignupScreenState extends State<SignupScreen> {
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: const Color.fromARGB(61, 228, 229, 231),
+                                    color: const Color.fromARGB(
+                                      61,
+                                      228,
+                                      229,
+                                      231,
+                                    ),
                                     blurRadius: 2,
                                     offset: const Offset(0, 1),
                                   ),
@@ -265,7 +282,9 @@ class _SignupScreenState extends State<SignupScreen> {
                                     color: Color.fromARGB(128, 0, 0, 0),
                                   ),
                                   suffixIcon: IconButton(
-                                    icon: const Icon(Icons.calendar_month_outlined),
+                                    icon: const Icon(
+                                      Icons.calendar_month_outlined,
+                                    ),
                                     onPressed: () {
                                       showDatePicker(
                                         context: context,
@@ -309,7 +328,12 @@ class _SignupScreenState extends State<SignupScreen> {
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: const Color.fromARGB(61, 228, 229, 231),
+                                    color: const Color.fromARGB(
+                                      61,
+                                      228,
+                                      229,
+                                      231,
+                                    ),
                                     blurRadius: 2,
                                     offset: const Offset(0, 1),
                                   ),
@@ -366,7 +390,12 @@ class _SignupScreenState extends State<SignupScreen> {
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: const Color.fromARGB(61, 228, 229, 231),
+                                    color: const Color.fromARGB(
+                                      61,
+                                      228,
+                                      229,
+                                      231,
+                                    ),
                                     blurRadius: 2,
                                     offset: const Offset(0, 1),
                                   ),
@@ -388,7 +417,8 @@ class _SignupScreenState extends State<SignupScreen> {
                                     ),
                                     onPressed: () {
                                       setState(() {
-                                        _isPasswordVisible = !_isPasswordVisible;
+                                        _isPasswordVisible =
+                                            !_isPasswordVisible;
                                       });
                                     },
                                   ),
@@ -434,13 +464,15 @@ class _SignupScreenState extends State<SignupScreen> {
                               child: ElevatedButton(
                                 onPressed: () {
                                   //if (_formKey.currentState?.saveAndValidate() ?? false) {
-                                    context.go('/home');
+                                  context.go('/home');
                                   //}
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.transparent,
                                   shadowColor: Colors.transparent,
-                                  padding: const EdgeInsets.symmetric(vertical: 14),
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 14,
+                                  ),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10),
                                   ),
