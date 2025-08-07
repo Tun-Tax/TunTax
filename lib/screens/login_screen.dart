@@ -111,8 +111,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Image.network(
-                                  'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/2048px-Google_%22G%22_logo.svg.png',
+                                Image.asset(
+                                  'assets/images/google-logo.png',
                                   height: 24.0,
                                 ),
                                 const SizedBox(width: 8.0),
@@ -144,8 +144,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Image.network(
-                                  'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/1200px-2021_Facebook_icon.svg.png',
+                                Image.asset(
+                                  'assets/images/facebook-logo.png',
                                   height: 24.0,
                                 ),
                                 const SizedBox(width: 8.0),
