@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:tuntax/widgets/custom_date_time_picker.dart';
 import 'package:tuntax/widgets/custom_text_field.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -161,69 +162,11 @@ class _SignupScreenState extends State<SignupScreen> {
                               ]),
                             ),
                             const SizedBox(height: 20),
-                            Text(
-                              'Tanggal lahir',
-                              style: GoogleFonts.poppins(
-                                color: const Color(0xFF635A92),
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: const Color.fromARGB(
-                                      61,
-                                      228,
-                                      229,
-                                      231,
-                                    ),
-                                    blurRadius: 2,
-                                    offset: const Offset(0, 1),
-                                  ),
-                                ],
-                              ),
-                              child: FormBuilderDateTimePicker(
-                                name: 'birth_date',
-                                inputType: InputType.date,
-                                decoration: InputDecoration(
-                                  hintText: '18/03/2024',
-                                  hintStyle: TextStyle(
-                                    color: Color.fromARGB(128, 0, 0, 0),
-                                  ),
-                                  suffixIcon: IconButton(
-                                    icon: const Icon(
-                                      Icons.calendar_month_outlined,
-                                    ),
-                                    onPressed: () {
-                                      showDatePicker(
-                                        context: context,
-                                        initialDate: DateTime.now(),
-                                        firstDate: DateTime(1900),
-                                        lastDate: DateTime.now(),
-                                      );
-                                    },
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: const BorderSide(
-                                      color: Color(0xFFE4E5E7),
-                                      width: 1,
-                                    ),
-                                  ),
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  contentPadding: const EdgeInsets.symmetric(
-                                    vertical: 14,
-                                    horizontal: 14,
-                                  ),
-                                ),
-                                validator: FormBuilderValidators.required(
-                                  errorText: 'Tanggal lahir wajib diisi',
-                                ),
+                            CustomDateTimePicker(
+                              name: 'birth_date',
+                              labelText: 'Tanggal lahir',
+                              validator: FormBuilderValidators.required(
+                                errorText: 'Tanggal lahir wajib diisi',
                               ),
                             ),
                             const SizedBox(height: 20),
