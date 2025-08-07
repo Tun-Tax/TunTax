@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tuntax/widgets/background.dart';
+import 'package:tuntax/widgets/custom_text_field.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
@@ -188,34 +189,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             ],
                           ),
                           const SizedBox(height: 24.0),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              'Email',
-                              style: GoogleFonts.poppins(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                                color: const Color.fromARGB(255, 115, 114, 116),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 8.0),
-                          FormBuilderTextField(
+                          CustomTextField(
                             name: 'email',
+                            labelText: 'Email',
                             controller: _emailController,
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: const Color(0xFFF5F5F5),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8.0),
-                                borderSide: BorderSide.none,
-                              ),
-                              contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 16.0,
-                                vertical: 12.0,
-                              ),
-                            ),
-                            keyboardType: TextInputType.emailAddress,
                             validator: FormBuilderValidators.compose([
                               FormBuilderValidators.required(
                                 errorText: 'Email tidak boleh kosong',
@@ -226,46 +203,17 @@ class _LoginScreenState extends State<LoginScreen> {
                             ]),
                           ),
                           const SizedBox(height: 8.0),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              'Kata Sandi',
-                              style: GoogleFonts.poppins(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                                color: const Color.fromARGB(255, 115, 114, 116),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 8.0),
-                          FormBuilderTextField(
+                          CustomTextField(
                             name: 'password',
+                            labelText: 'Kata Sandi',
                             controller: _passwordController,
+                            isPassword: true,
                             obscureText: _obscureText,
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: const Color(0xFFF5F5F5),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8.0),
-                                borderSide: BorderSide.none,
-                              ),
-                              contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 16.0,
-                                vertical: 12.0,
-                              ),
-                              suffixIcon: IconButton(
-                                icon: Icon(
-                                  _obscureText
-                                      ? Icons.visibility_off
-                                      : Icons.visibility,
-                                ),
-                                onPressed: () {
-                                  setState(() {
-                                    _obscureText = !_obscureText;
-                                  });
-                                },
-                              ),
-                            ),
+                            onVisibilityToggle: () {
+                              setState(() {
+                                _obscureText = !_obscureText;
+                              });
+                            },
                             validator: FormBuilderValidators.compose([
                               FormBuilderValidators.required(
                                 errorText: 'Kata sandi tidak boleh kosong',
