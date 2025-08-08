@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tuntax/widgets/account/custom_outlined_button.dart';
 
 class UserProfileCard extends StatelessWidget {
   const UserProfileCard({super.key});
@@ -10,12 +11,12 @@ class UserProfileCard extends StatelessWidget {
       child: Row(
         children: [
           const CircleAvatar(
-            radius: 30,
+            radius: 24,
             backgroundColor: Color(0xFFE0D6FF),
             child: Text(
               'A',
               style: TextStyle(
-                fontSize: 24,
+                fontSize: 20,
                 color: Color(0xFF4A00E0),
               ),
             ),
@@ -50,18 +51,11 @@ class UserProfileCard extends StatelessWidget {
                   fontSize: 12,
                 ),
               ),
-              OutlinedButton.icon(
+              const SizedBox(height: 8),
+              CustomOutlinedButton(
                 onPressed: () {},
-                icon: const Icon(Icons.logout),
-                label: const Text('Log Out'),
-                style: OutlinedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  foregroundColor: Colors.black,
-                  side: const BorderSide(color: Colors.black),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
+                text: 'Log Out',
+                icon: Icons.logout,
               ),
             ],
           )
