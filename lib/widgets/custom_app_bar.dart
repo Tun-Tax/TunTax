@@ -2,19 +2,25 @@ import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final void Function(String)? onIconPressed;
+  final bool showActions;
 
-  const CustomAppBar({super.key, this.onIconPressed});
+  const CustomAppBar({
+    super.key,
+    this.onIconPressed,
+    this.showActions = true,
+  });
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      automaticallyImplyLeading: false,
       backgroundColor: Colors.transparent,
       elevation: 0,
       title: Image.asset(
         'assets/images/appbar-logo.png',
         height: 24,
       ),
-      actions: _appBarActions(),
+      actions: showActions ? _appBarActions() : null,
     );
   }
 
