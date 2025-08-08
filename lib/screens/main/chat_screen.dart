@@ -8,12 +8,12 @@ class ChatScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BackgroundMiddle(
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
-          child: Padding(
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: BackgroundMiddle(
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          body: Padding(
             padding: EdgeInsets.symmetric(horizontal: 24.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
