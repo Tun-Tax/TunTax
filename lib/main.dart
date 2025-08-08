@@ -26,12 +26,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       title: 'Tuntax',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFFC175F5),
+          primary: const Color(0xFFC175F5),
+          secondary: const Color(0xFF4983F6),
+        ),
         scaffoldBackgroundColor: Colors.white,
         useMaterial3: true,
         pageTransitionsTheme: const PageTransitionsTheme(
           builders: {
-            TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
+            TargetPlatform.android: FadeForwardsPageTransitionsBuilder(),
             TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
           },
         ),
