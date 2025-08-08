@@ -29,44 +29,9 @@ class _MyHomePageState extends State<ScaffoldWithAppBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
       appBar: CustomAppBar(onIconPressed: _handleAppBarIconPress),
       body: widget.child,
-    );
-  }
-}
-
-class DateScreen extends StatelessWidget {
-  const DateScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Date Screen')),
-      body: const Center(child: Text('This is the Date Screen')),
-    );
-  }
-}
-
-class NotificationScreen extends StatelessWidget {
-  const NotificationScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Notification Screen')),
-      body: const Center(child: Text('This is the Notification Screen')),
-    );
-  }
-}
-
-class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Settings Screen')),
-      body: const Center(child: Text('This is the Settings Screen')),
     );
   }
 }

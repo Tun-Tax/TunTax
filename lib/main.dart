@@ -26,6 +26,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       title: 'Tuntax',
       theme: ThemeData(
+        textSelectionTheme:
+            const TextSelectionThemeData(cursorColor: Colors.black),
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color(0xFFC175F5),
           primary: const Color(0xFFC175F5),
