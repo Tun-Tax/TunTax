@@ -9,6 +9,7 @@ class TransactionsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Background(
       child: Scaffold(
+        extendBodyBehindAppBar: true,
         appBar: CustomAppBar(),
         backgroundColor: Colors.transparent,
         body: Center(

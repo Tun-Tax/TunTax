@@ -13,6 +13,7 @@ class ChatScreen extends StatelessWidget {
       onTap: () => FocusScope.of(context).unfocus(),
       child: const BackgroundMiddle(
         child: Scaffold(
+          extendBodyBehindAppBar: true,
           appBar: CustomAppBar(),
           backgroundColor: Colors.transparent,
           body: Padding(
@@ -44,4 +45,5 @@ class ChatScreen extends StatelessWidget {
     );
   }
 }
+
 
