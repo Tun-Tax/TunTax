@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tuntax/widgets/background.dart';
+import 'package:tuntax/widgets/custom_app_bar.dart';
 
 class TransactionsScreen extends StatelessWidget {
   const TransactionsScreen({super.key});
@@ -7,8 +8,12 @@ class TransactionsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Background(
-      child: Center(
-        child: Text('Transactions Screen'),
+      child: Scaffold(
+        appBar: CustomAppBar(),
+        backgroundColor: Colors.transparent,
+        body: Center(
+          child: Text('Transactions Screen'),
+        ),
       ),
     );
   }

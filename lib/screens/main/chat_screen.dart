@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tuntax/widgets/background_middle.dart';
 import 'package:tuntax/widgets/chat_text_field.dart';
+import 'package:tuntax/widgets/custom_app_bar.dart';
 import 'package:tuntax/widgets/prompt_chip.dart';
 
 class ChatScreen extends StatelessWidget {
@@ -10,8 +11,9 @@ class ChatScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
-      child: BackgroundMiddle(
+      child: const BackgroundMiddle(
         child: Scaffold(
+          appBar: CustomAppBar(),
           backgroundColor: Colors.transparent,
           body: Padding(
             padding: EdgeInsets.symmetric(horizontal: 24.0),
@@ -42,3 +44,4 @@ class ChatScreen extends StatelessWidget {
     );
   }
 }
+

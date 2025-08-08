@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tuntax/widgets/background.dart';
+import 'package:tuntax/widgets/custom_app_bar.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
@@ -7,8 +8,12 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Background(
-      child: Center(
-        child: Text('Search Screen'),
+      child: Scaffold(
+        appBar: CustomAppBar(),
+        backgroundColor: Colors.transparent,
+        body: Center(
+          child: Text('Search Screen'),
+        ),
       ),
     );
   }
