@@ -7,9 +7,11 @@ import 'package:tuntax/screens/main/chat_screen.dart';
 import 'package:tuntax/screens/main/home_screen.dart';
 import 'package:tuntax/screens/main/search_screen.dart';
 import 'package:tuntax/screens/main/transactions_screen.dart';
+import 'package:tuntax/screens/misc/date_screen.dart';
+import 'package:tuntax/screens/misc/notification_screen.dart';
+import 'package:tuntax/screens/misc/settings_screen.dart';
 import 'package:tuntax/screens/signup_screen.dart';
 import 'package:tuntax/widgets/scaffold_with_nav_bar.dart';
-import 'package:tuntax/widgets/scaffold_with_app_bar.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellNavigatorKey = GlobalKey<NavigatorState>();
