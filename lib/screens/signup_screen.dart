@@ -48,8 +48,10 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
           _phoneController.text,
           values['birth_date'] as DateTime,
         );
-        // On successful signup, the authStateProvider will update and redirect
-        // No explicit navigation needed here as it's handled by the router's redirect logic
+
+        if (context.mounted) {
+          context.go('/home');
+        }
       } on FirebaseAuthException catch (e) {
         String message;
         if (e.code == 'weak-password') {

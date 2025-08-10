@@ -12,8 +12,8 @@ import 'package:tuntax/screens/misc/notification_screen.dart';
 import 'package:tuntax/screens/misc/settings_screen.dart';
 import 'package:tuntax/screens/signup_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tuntax/widgets/scaffold_with_nav_bar.dart';
 import 'package:tuntax/state/auth_state.dart';
+import 'package:tuntax/widgets/scaffold_with_nav_bar.dart';
 import 'package:tuntax/utils/app_preferences.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -45,7 +45,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
           }
         },
         pageBuilder: (context, state) =>
-            MaterialPage(key: state.pageKey, child: const SizedBox.shrink()), // Placeholder
+            MaterialPage(key: state.pageKey, child: const SizedBox.shrink()),
       ),
       GoRoute(
         path: '/landing',
@@ -114,28 +114,5 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         },
       ),
     ],
-    redirect: (context, state) async {
-      final isFirstTimeUser = await isFirstTimeUserFuture;
-      final isAuthenticated = authState == AuthState.authenticated;
-
-      final goingToLogin = state.matchedLocation == '/login';
-      final goingToSignup = state.matchedLocation == '/signup';
-      final goingToLanding = state.matchedLocation == '/landing';
-
-      // If not first time user and not authenticated, redirect to login
-      if (!isFirstTimeUser && !isAuthenticated && !goingToLogin && !goingToSignup) {
-        return '/login';
-      }
-      // If authenticated and trying to go to login/signup/landing, redirect to home
-      if (isAuthenticated && (goingToLogin || goingToSignup || goingToLanding)) {
-        return '/home';
-      }
-      // If first time user and not going to landing, redirect to landing
-      if (isFirstTimeUser && !goingToLanding) {
-        return '/landing';
-      }
-      // No redirect needed
-      return null;
-    },
   );
 });

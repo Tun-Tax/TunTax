@@ -38,8 +38,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           _emailController.text,
           _passwordController.text,
         );
-        // On successful login, the authStateProvider will update and redirect
-        // No explicit navigation needed here as it's handled by the router's redirect logic
+
+        if (context.mounted) {
+          context.go('/home');
+        }
       } on FirebaseAuthException catch (e) {
         String message;
         if (e.code == 'user-not-found') {
@@ -49,13 +51,17 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         } else {
           message = e.message ?? 'An unknown error occurred.';
         }
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(message)),
-        );
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(message)),
+          );
+        }
       } catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('An unexpected error occurred: $e')),
-        );
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('An unexpected error occurred: $e')),
+          );
+        }
       }
     }
   }
