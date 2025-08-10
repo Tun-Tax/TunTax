@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:tuntax/services/auth_service.dart';
 import 'package:tuntax/state/auth_state.dart';
 import 'package:tuntax/widgets/account/account_management_card.dart';
 import 'package:tuntax/widgets/background_alt.dart';
@@ -11,7 +13,7 @@ class AccountScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userAsyncValue = ref.watch(userInfoProvider);
+    final userAsyncValue = ref.watch(userProvider);
 
     return BackgroundAlt(
       child: Scaffold(
@@ -24,7 +26,7 @@ class AccountScreen extends ConsumerWidget {
                 if (user != null) {
                   return UserProfileCard(user: user);
                 } else {
-                  // Handle the case where the user is not logged in
+                  // This part should ideally not be reached if the router redirects correctly
                   return const Center(child: Text('Not logged in'));
                 }
               },
@@ -33,9 +35,28 @@ class AccountScreen extends ConsumerWidget {
             ),
             const SizedBox(height: 32),
             const AccountManagementCard(),
+            const SizedBox(height: 24),
+            // ElevatedButton(
+            //   onPressed: () async {
+            //     await ref.read(authServiceProvider).signOut();
+            //     if (context.mounted) {
+            //       context.go('/login');
+            //     }
+            //   },
+            //   style: ElevatedButton.styleFrom(
+            //     backgroundColor: Colors.red,
+            //     foregroundColor: Colors.white,
+            //     shape: RoundedRectangleBorder(
+            //       borderRadius: BorderRadius.circular(12),
+            //     ),
+            //     minimumSize: const Size(double.infinity, 50),
+            //   ),
+            //   child: const Text('Log Out'),
+            // ),
           ],
         ),
       ),
     );
   }
 }
+

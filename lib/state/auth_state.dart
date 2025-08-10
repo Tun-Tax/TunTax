@@ -1,6 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:tuntax/models/user_model.dart';
 import 'package:tuntax/services/auth_service.dart';
+import 'package:tuntax/services/database_service.dart';
 import 'package:tuntax/utils/app_preferences.dart';
 
 enum AuthState {
@@ -36,12 +38,20 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
   }
 }
 
-final authStateProvider = StateNotifierProvider<AuthStateNotifier, AuthState>((ref) {
+final authStateProvider =
+    StateNotifierProvider<AuthStateNotifier, AuthState>((ref) {
   final authService = ref.watch(authServiceProvider);
   return AuthStateNotifier(authService);
 });
 
-final userInfoProvider = StreamProvider<User?>((ref) {
+final userProvider = StreamProvider<UserModel?>((ref) {
   final authService = ref.watch(authServiceProvider);
-  return authService.authStateChanges();
+  final databaseService = ref.watch(databaseServiceProvider);
+
+  return authService.authStateChanges().asyncMap((user) {
+    if (user != null) {
+      return databaseService.getUser(user.uid);
+    }
+    return null;
+  });
 });

@@ -38,11 +38,15 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
   Future<void> _signUp() async {
     if (_formKey.currentState?.saveAndValidate() ?? false) {
       final authService = ref.read(authServiceProvider);
+      final values = _formKey.currentState!.value;
+
       try {
         await authService.signUpWithEmailAndPassword(
           _emailController.text,
           _passwordController.text,
           _fullNameController.text,
+          _phoneController.text,
+          values['birth_date'] as DateTime,
         );
         // On successful signup, the authStateProvider will update and redirect
         // No explicit navigation needed here as it's handled by the router's redirect logic

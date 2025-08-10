@@ -1,20 +1,19 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:tuntax/models/user_model.dart';
 import 'package:tuntax/services/auth_service.dart';
 import 'package:tuntax/widgets/account/custom_outlined_button.dart';
 
 class UserProfileCard extends ConsumerWidget {
-  final User user;
+  final UserModel user;
   const UserProfileCard({super.key, required this.user});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final authService = ref.watch(authServiceProvider);
-    final creationDate = user.metadata.creationTime;
-    final formattedDate = creationDate != null
-        ? DateFormat('d MMMM yyyy', 'id_ID').format(creationDate)
+    final formattedDate = user.createdAt != null
+        ? DateFormat('d MMMM yyyy', 'id_ID').format(user.createdAt!)
         : 'N/A';
 
     return Padding(
@@ -24,20 +23,16 @@ class UserProfileCard extends ConsumerWidget {
           CircleAvatar(
             radius: 24,
             backgroundColor: const Color(0xFFE0D6FF),
-            backgroundImage:
-                user.photoURL != null ? NetworkImage(user.photoURL!) : null,
-            child: user.photoURL == null
-                ? Text(
-                    user.email?.substring(0, 1).toUpperCase() ?? 'A',
-                    style: const TextStyle(
-                      fontSize: 20,
-                      color: Color(0xFF4A00E0),
-                    ),
-                  )
-                : null,
+            child: Text(
+              user.displayName?.substring(0, 1).toUpperCase() ?? 'A',
+              style: const TextStyle(
+                fontSize: 20,
+                color: Color(0xFF4A00E0),
+              ),
+            ),
           ),
           const SizedBox(width: 8),
-          Column(
+          Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
