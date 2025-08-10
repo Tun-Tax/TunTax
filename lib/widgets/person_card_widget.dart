@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class PersonCardWidget extends StatelessWidget {
   final String imageUrl;
@@ -8,13 +9,13 @@ class PersonCardWidget extends StatelessWidget {
   final double rating;
 
   const PersonCardWidget({
-    Key? key,
+    super.key,
     required this.imageUrl,
     required this.name,
     required this.description,
     required this.location,
     required this.rating,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +34,7 @@ class PersonCardWidget extends StatelessWidget {
               radius: 40,
               child: ClipOval(
                 child: Image.asset(
-                  imageUrl,
+                  "assets/images/person/person_1.png",
                   fit: BoxFit.cover,
                   width: 80,
                   height: 80,
@@ -70,19 +71,33 @@ class PersonCardWidget extends StatelessWidget {
                   const SizedBox(height: 8.0),
                   Row(
                     children: [
-                      ElevatedButton.icon(
-                        onPressed: () {
-                          // Handle Hubungi button press
-                        },
-                        icon: const Icon(Icons.send, size: 18),
-                        label: const Text('Hubungi'),
+                      ElevatedButton(
+                        onPressed: () {},
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF1A237E), // Navy Blue 700
+                          
+                          backgroundColor: const Color(0xFF1976D2), // blue
                           foregroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0),
                           ),
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 0),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Text(
+                              'Hubungi',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            const SizedBox(width: 6),
+                            SvgPicture.asset(
+                              'assets/svgs/send_paper_plane.svg',
+                              width: 12,
+                              height: 12,
+                              colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                            ),
+                          ],
                         ),
                       ),
                       const Spacer(),
