@@ -1,40 +1,55 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
+import 'package:tuntax/services/auth_service.dart';
 import 'package:tuntax/widgets/account/custom_outlined_button.dart';
 
-class UserProfileCard extends StatelessWidget {
-  const UserProfileCard({super.key});
+class UserProfileCard extends ConsumerWidget {
+  final User user;
+  const UserProfileCard({super.key, required this.user});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final authService = ref.watch(authServiceProvider);
+    final creationDate = user.metadata.creationTime;
+    final formattedDate = creationDate != null
+        ? DateFormat('d MMMM yyyy', 'id_ID').format(creationDate)
+        : 'N/A';
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
       child: Row(
         children: [
-          const CircleAvatar(
+          CircleAvatar(
             radius: 24,
-            backgroundColor: Color(0xFFE0D6FF),
-            child: Text(
-              'A',
-              style: TextStyle(
-                fontSize: 20,
-                color: Color(0xFF4A00E0),
-              ),
-            ),
+            backgroundColor: const Color(0xFFE0D6FF),
+            backgroundImage:
+                user.photoURL != null ? NetworkImage(user.photoURL!) : null,
+            child: user.photoURL == null
+                ? Text(
+                    user.email?.substring(0, 1).toUpperCase() ?? 'A',
+                    style: const TextStyle(
+                      fontSize: 20,
+                      color: Color(0xFF4A00E0),
+                    ),
+                  )
+                : null,
           ),
           const SizedBox(width: 8),
-          const Column(
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Angela Ibis',
-                style: TextStyle(
+                user.displayName ?? 'No Name',
+                style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Text(
-                'tuntaxixi@gmail.com',
-                style: TextStyle(
+                user.email ?? 'No Email',
+                style: const TextStyle(
                   color: Colors.black54,
                 ),
               ),
@@ -44,16 +59,18 @@ class UserProfileCard extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              const Text(
-                'bergabung 20 Agustus 2021',
-                style: TextStyle(
+              Text(
+                'bergabung $formattedDate',
+                style: const TextStyle(
                   color: Colors.black54,
                   fontSize: 12,
                 ),
               ),
               const SizedBox(height: 8),
               CustomOutlinedButton(
-                onPressed: () {},
+                onPressed: () async {
+                  await authService.signOut();
+                },
                 text: 'Log Out',
                 icon: Icons.logout,
               ),
