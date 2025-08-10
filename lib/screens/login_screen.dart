@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tuntax/state/auth_state.dart';
 import 'package:tuntax/widgets/background.dart';
 import 'package:tuntax/widgets/custom_text_field.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -40,7 +41,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         );
 
         if (!mounted) return;
-          context.go('/home');
+        ref.invalidate(userProvider); // Invalidate userProvider to force a refresh
+        context.go('/home');
       } on FirebaseAuthException catch (e) {
         String message;
         if (e.code == 'user-not-found') {

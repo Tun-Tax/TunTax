@@ -6,6 +6,7 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tuntax/services/auth_service.dart';
+import 'package:tuntax/state/auth_state.dart';
 import 'package:tuntax/widgets/background.dart';
 import 'package:tuntax/widgets/custom_date_time_picker.dart';
 import 'package:tuntax/widgets/custom_text_field.dart';
@@ -50,7 +51,8 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
         );
 
         if (!mounted) return;
-          context.go('/home');
+        ref.invalidate(userProvider); // Invalidate userProvider to force a refresh
+        context.go('/home');
       } on FirebaseAuthException catch (e) {
         String message;
         if (e.code == 'weak-password') {

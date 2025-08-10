@@ -40,12 +40,10 @@ final goRouterProvider = Provider<GoRouter>((ref) {
               case AuthState.unauthenticated:
                 return '/login';
               case AuthState.initial:
-              return '/login';
+                return '/login';
             }
           }
         },
-        pageBuilder: (context, state) =>
-            MaterialPage(key: state.pageKey, child: const SizedBox.shrink()),
       ),
       GoRoute(
         path: '/landing',
