@@ -22,8 +22,12 @@ class CustomNavBar extends StatelessWidget {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              HSLColor.fromColor(const Color(0xFF4983F6)).withLightness(0.95).toColor(),
-              HSLColor.fromColor(const Color(0xFFC175F5)).withLightness(0.95).toColor(),
+              HSLColor.fromColor(
+                const Color(0xFF4983F6),
+              ).withLightness(0.95).toColor(),
+              HSLColor.fromColor(
+                const Color(0xFFC175F5),
+              ).withLightness(0.95).toColor(),
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -48,23 +52,23 @@ class CustomNavBar extends StatelessWidget {
       {'iconPath': 'assets/svgs/home.svg', 'label': 'Home', 'isSvg': true},
       {
         'iconPath': 'assets/svgs/file_text.svg',
-        'label': 'Transactions',
-        'isSvg': true
+        'label': 'Article',
+        'isSvg': true,
       },
       {
         'iconPath': 'assets/images/navbar-logo.png',
         'label': 'Chat',
-        'isSvg': false
+        'isSvg': false,
+      },
+      {
+        'iconPath': 'assets/images/academic-cap.png',
+        'label': 'Academy',
+        'isSvg': false,
       },
       {
         'iconPath': 'assets/svgs/search_person.svg',
         'label': 'Search',
-        'isSvg': true
-      },
-      {
-        'iconPath': 'assets/svgs/person.svg',
-        'label': 'Account',
-        'isSvg': true
+        'isSvg': true,
       },
     ];
 
@@ -90,7 +94,9 @@ class CustomNavBar extends StatelessWidget {
             color: Colors.white,
             shape: BoxShape.circle,
           ),
-          child: Center(child: iconWidget), // Center the icon within the container
+          child: Center(
+            child: iconWidget,
+          ), // Center the icon within the container
         ),
         label: item['label'],
       );

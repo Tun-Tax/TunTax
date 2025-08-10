@@ -4,11 +4,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final void Function(String)? onIconPressed;
   final bool showActions;
 
-  const CustomAppBar({
-    super.key,
-    this.onIconPressed,
-    this.showActions = true,
-  });
+  const CustomAppBar({super.key, this.onIconPressed, this.showActions = true});
 
   @override
   Widget build(BuildContext context) {
@@ -16,19 +12,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: false,
       backgroundColor: Colors.transparent,
       elevation: 0,
-      title: Image.asset(
-        'assets/images/appbar-logo.png',
-        height: 24,
-      ),
+      title: Image.asset('assets/images/appbar-logo.png', height: 24),
       actions: showActions ? _appBarActions() : null,
     );
   }
 
   List<Widget> _appBarActions() {
     final List<Map<String, dynamic>> items = [
-      {'icon': Icons.calendar_today_outlined, 'label': 'Date'},
       {'icon': Icons.notifications_outlined, 'label': 'Notification'},
-      {'icon': Icons.settings_outlined, 'label': 'Settings'},
+      {'icon': Icons.menu, 'label': 'Menu'},
     ];
 
     return items

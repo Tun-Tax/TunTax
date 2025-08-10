@@ -62,7 +62,7 @@ class LandingScreen extends ConsumerWidget {
             Image.asset('assets/images/landing-logo.png'),
             const SizedBox(height: 40),
             Text(
-              'Aplikasi keuangan dan pajak UMKM',
+              'Aplikasi edukasi pajak UMKM',
               style: GoogleFonts.poppins(
                 color: const Color(0xFF635A92),
                 fontSize: 32,
