@@ -26,33 +26,6 @@ class _SignupScreenState extends State<SignupScreen> {
       child: Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
-          centerTitle: true,
-          title: ShaderMask(
-            shaderCallback: (Rect bounds) {
-              return const LinearGradient(
-                colors: [Color(0xFF4983F6), Color(0xFFC175F5)],
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-              ).createShader(bounds);
-            },
-            blendMode: BlendMode.srcIn,
-            child: Text(
-              'Daftar Akun',
-              style: GoogleFonts.poppins(
-                fontSize: 26,
-                fontWeight: FontWeight.w700,
-                letterSpacing: -0.52,
-                height: 1.3,
-                shadows: [
-                  Shadow(
-                    offset: Offset(1.0, 1.2),
-                    blurRadius: 3.0,
-                    color: Colors.black.withAlpha(77),
-                  ),
-                ],
-              ),
-            ),
-          ),
           backgroundColor: Colors.transparent,
           elevation: 0,
           scrolledUnderElevation: 0,
@@ -103,7 +76,33 @@ class _SignupScreenState extends State<SignupScreen> {
                             Center(
                               child: Column(
                                 children: [
-                                  SizedBox(height: 20),
+                                  const SizedBox(height: 40),
+                                  ShaderMask(
+                                    shaderCallback: (Rect bounds) {
+                                      return const LinearGradient(
+                                        colors: [Color(0xFF4983F6), Color(0xFFC175F5)],
+                                        begin: Alignment.centerLeft,
+                                        end: Alignment.centerRight,
+                                      ).createShader(bounds);
+                                    },
+                                    blendMode: BlendMode.srcIn,
+                                    child: Text(
+                                      'Daftar Akun',
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 26,
+                                        fontWeight: FontWeight.w700,
+                                        letterSpacing: -0.52,
+                                        height: 1.3,
+                                        shadows: [
+                                          Shadow(
+                                            offset: const Offset(1.0, 1.2),
+                                            blurRadius: 3.0,
+                                            color: Colors.black.withAlpha(77),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
