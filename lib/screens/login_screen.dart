@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tuntax/state/auth_state.dart';
 import 'package:tuntax/widgets/background.dart';
 import 'package:tuntax/widgets/custom_text_field.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tuntax/services/auth_service.dart';
+import 'package:firebase_auth/firebase_auth.dart'; // Import for FirebaseAuthException
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends ConsumerState<LoginScreen> {
   final _formKey = GlobalKey<FormBuilderState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -27,6 +31,40 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
+  Future<void> _signIn() async {
+    if (_formKey.currentState?.saveAndValidate() ?? false) {
+      final authService = ref.read(authServiceProvider);
+      try {
+        await authService.signInWithEmailAndPassword(
+          _emailController.text,
+          _passwordController.text,
+        );
+
+        if (!mounted) return;
+        ref.invalidate(userProvider); // Invalidate userProvider to force a refresh
+        context.go('/home');
+      } on FirebaseAuthException catch (e) {
+        String message;
+        if (e.code == 'user-not-found') {
+          message = 'No user found for that email.';
+        } else if (e.code == 'wrong-password') {
+          message = 'Wrong password provided for that user.';
+        } else {
+          message = e.message ?? 'An unknown error occurred.';
+        }
+        if (!mounted) return; // Add mounted check
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(message)),
+        );
+      } catch (e) {
+        if (!mounted) return; // Add mounted check
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('An unexpected error occurred: $e')),
+        );
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -35,38 +73,6 @@ class _LoginScreenState extends State<LoginScreen> {
       },
       child: Scaffold(
         extendBodyBehindAppBar: true,
-        appBar: AppBar(
-          centerTitle: true,
-          title: ShaderMask(
-            shaderCallback: (Rect bounds) {
-              return const LinearGradient(
-                colors: [Color(0xFF4983F6), Color(0xFFC175F5)],
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-              ).createShader(bounds);
-            },
-            blendMode: BlendMode.srcIn,
-            child: Text(
-              'Masuk',
-              style: GoogleFonts.poppins(
-                fontSize: 26,
-                fontWeight: FontWeight.w700,
-                letterSpacing: -0.52,
-                height: 1.3,
-                shadows: [
-                  Shadow(
-                    offset: Offset(1.0, 1.2),
-                    blurRadius: 3.0,
-                    color: Colors.black.withAlpha(77),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          scrolledUnderElevation: 0,
-        ),
         body: Background(
           child: SafeArea(
             child: Center(
@@ -86,6 +92,33 @@ class _LoginScreenState extends State<LoginScreen> {
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                          ShaderMask(
+                            shaderCallback: (Rect bounds) {
+                              return const LinearGradient(
+                                colors: [Color(0xFF4983F6), Color(0xFFC175F5)],
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                              ).createShader(bounds);
+                            },
+                            blendMode: BlendMode.srcIn,
+                            child: Text(
+                              'Masuk',
+                              style: GoogleFonts.poppins(
+                                fontSize: 26,
+                                fontWeight: FontWeight.w700,
+                                letterSpacing: -0.52,
+                                height: 1.3,
+                                shadows: [
+                                  Shadow(
+                                    offset: Offset(1.0, 1.2),
+                                    blurRadius: 3.0,
+                                    color: Colors.black.withAlpha(77),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 8.0),
                           Text(
                             'Masuk ke akun atau buat akun baru untuk menggunakan aplikasi',
                             textAlign: TextAlign.center,
@@ -269,19 +302,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           const SizedBox(height: 8.0),
                           ElevatedButton(
-                            onPressed: () {
-                              if (_formKey.currentState?.saveAndValidate() ??
-                                  false) {
-                                debugPrint(
-                                  'Email: ${_formKey.currentState?.fields['email']?.value}',
-                                );
-                                debugPrint(
-                                  'Password: ${_formKey.currentState?.fields['password']?.value}',
-                                );
-                                debugPrint('Remember Me: $_rememberMe');
-                                debugPrint('Login button pressed');
-                              }
-                            },
+                            onPressed: _signIn,
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(
                                 0xFF4285F4,
