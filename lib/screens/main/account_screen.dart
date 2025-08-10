@@ -22,7 +22,7 @@ class AccountScreen extends ConsumerWidget {
             userAsyncValue.when(
               data: (user) {
                 if (user != null) {
-                  return UserProfileCard(user: user);
+                  return const UserProfileCard(); // Removed user parameter
                 } else {
                   // This part should ideally not be reached if the router redirects correctly
                   return const Center(child: Text('Not logged in'));
@@ -57,4 +57,3 @@ class AccountScreen extends ConsumerWidget {
     );
   }
 }
-
