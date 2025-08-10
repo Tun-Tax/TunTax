@@ -36,8 +36,8 @@ class AuthService {
       await _databaseService.createUser(userModel);
 
       return userCredential;
-    } on FirebaseAuthException catch (e) {
-      throw e; // Re-throw the exception for UI to handle
+    } on FirebaseAuthException {
+      rethrow; // Re-throw the exception for UI to handle
     }
   }
 
@@ -49,8 +49,8 @@ class AuthService {
         password: password,
       );
       return userCredential;
-    } on FirebaseAuthException catch (e) {
-      throw e; // Re-throw the exception for UI to handle
+    } on FirebaseAuthException {
+      rethrow; // Re-throw the exception for UI to handle
     }
   }
 

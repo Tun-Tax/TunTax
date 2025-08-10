@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tuntax/models/user_model.dart';
 
@@ -11,7 +12,7 @@ class DatabaseService {
       await _db.collection('users').doc(user.uid).set(user.toFirestore());
     } catch (e) {
       // Handle potential errors, e.g., by logging them
-      print('Error creating user in Firestore: $e');
+      debugPrint('Error creating user in Firestore: $e');
       rethrow;
     }
   }
@@ -25,7 +26,7 @@ class DatabaseService {
       }
       return null;
     } catch (e) {
-      print('Error getting user from Firestore: $e');
+      debugPrint('Error getting user from Firestore: $e');
       rethrow;
     }
   }

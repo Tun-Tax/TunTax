@@ -39,9 +39,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           _passwordController.text,
         );
 
-        if (context.mounted) {
+        if (!mounted) return;
           context.go('/home');
-        }
       } on FirebaseAuthException catch (e) {
         String message;
         if (e.code == 'user-not-found') {
@@ -51,17 +50,15 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         } else {
           message = e.message ?? 'An unknown error occurred.';
         }
-        if (context.mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(message)),
-          );
-        }
+        if (!mounted) return; // Add mounted check
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(message)),
+        );
       } catch (e) {
-        if (context.mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('An unexpected error occurred: $e')),
-          );
-        }
+        if (!mounted) return; // Add mounted check
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('An unexpected error occurred: $e')),
+        );
       }
     }
   }

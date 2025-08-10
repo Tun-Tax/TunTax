@@ -49,9 +49,8 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
           values['birth_date'] as DateTime,
         );
 
-        if (context.mounted) {
+        if (!mounted) return;
           context.go('/home');
-        }
       } on FirebaseAuthException catch (e) {
         String message;
         if (e.code == 'weak-password') {
@@ -61,17 +60,15 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
         } else {
           message = e.message ?? 'An unknown error occurred.';
         }
-        if (context.mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(message)),
-          );
-        }
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(message)),
+        );
       } catch (e) {
-        if (context.mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('An unexpected error occurred: $e')),
-          );
-        }
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('An unexpected error occurred: $e')),
+        );
       }
     }
   }
