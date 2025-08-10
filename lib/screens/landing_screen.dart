@@ -60,7 +60,7 @@ class LandingScreen extends StatelessWidget {
             Image.asset('assets/images/landing-logo.png'),
             SizedBox(height: 40),
             Text(
-              'Aplikasi keuangan dan pajak UMKM',
+              'Aplikasi edukasi pajak UMKM',
               style: GoogleFonts.poppins(
                 color: Color(0xFF635A92),
                 fontSize: 32,

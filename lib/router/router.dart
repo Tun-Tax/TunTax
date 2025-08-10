@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tuntax/screens/landing_screen.dart';
 import 'package:tuntax/screens/login_screen.dart';
+import 'package:tuntax/screens/main/academy_screen.dart';
 import 'package:tuntax/screens/main/account_screen.dart';
 import 'package:tuntax/screens/main/chat_screen.dart';
 import 'package:tuntax/screens/main/home_screen.dart';
 import 'package:tuntax/screens/main/search_screen.dart';
-import 'package:tuntax/screens/main/transactions_screen.dart';
+import 'package:tuntax/screens/main/article_screen.dart';
 import 'package:tuntax/screens/misc/date_screen.dart';
 import 'package:tuntax/screens/misc/notification_screen.dart';
-import 'package:tuntax/screens/misc/settings_screen.dart';
 import 'package:tuntax/screens/signup_screen.dart';
 import 'package:tuntax/widgets/scaffold_with_nav_bar.dart';
 
@@ -47,9 +47,9 @@ final router = GoRouter(
               const NoTransitionPage(child: HomeScreen()),
         ),
         GoRoute(
-          path: '/transactions',
+          path: '/article',
           pageBuilder: (context, state) =>
-              const NoTransitionPage(child: TransactionsScreen()),
+              const NoTransitionPage(child: ArticleScreen()),
         ),
         GoRoute(
           path: '/chat',
@@ -57,14 +57,14 @@ final router = GoRouter(
               const NoTransitionPage(child: ChatScreen()),
         ),
         GoRoute(
+          path: '/academy',
+          pageBuilder: (context, state) =>
+              const NoTransitionPage(child: AcademyScreen()),
+        ),
+        GoRoute(
           path: '/search',
           pageBuilder: (context, state) =>
               const NoTransitionPage(child: SearchScreen()),
-        ),
-        GoRoute(
-          path: '/account',
-          pageBuilder: (context, state) =>
-              const NoTransitionPage(child: AccountScreen()),
         ),
       ],
     ),
@@ -81,9 +81,9 @@ final router = GoRouter(
       },
     ),
     GoRoute(
-      path: '/settings',
+      path: '/menu',
       builder: (BuildContext context, GoRouterState state) {
-        return const SettingsScreen();
+        return const AccountScreen();
       },
     ),
   ],

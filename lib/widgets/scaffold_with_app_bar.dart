@@ -14,14 +14,11 @@ class ScaffoldWithAppBar extends StatefulWidget {
 class _MyHomePageState extends State<ScaffoldWithAppBar> {
   void _handleAppBarIconPress(String label) {
     switch (label) {
-      case 'Date':
-        context.push('/date');
-        break;
       case 'Notification':
         context.push('/notification');
         break;
-      case 'Settings':
-        context.push('/settings');
+      case 'Menu':
+        context.push('/menu');
         break;
     }
   }
