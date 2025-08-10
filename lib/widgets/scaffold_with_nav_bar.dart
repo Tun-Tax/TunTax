@@ -24,16 +24,16 @@ class ScaffoldWithNavBar extends StatelessWidget {
     if (location.startsWith('/home')) {
       return 0;
     }
-    if (location.startsWith('/transactions')) {
+    if (location.startsWith('/article')) {
       return 1;
     }
     if (location.startsWith('/chat')) {
       return 2;
     }
-    if (location.startsWith('/search')) {
+    if (location.startsWith('/academy')) {
       return 3;
     }
-    if (location.startsWith('/account')) {
+    if (location.startsWith('/search')) {
       return 4;
     }
     return 0;
@@ -45,16 +45,16 @@ class ScaffoldWithNavBar extends StatelessWidget {
         context.go('/home');
         break;
       case 1:
-        context.go('/transactions');
+        context.go('/article');
         break;
       case 2:
         context.go('/chat');
         break;
       case 3:
-        context.go('/search');
+        context.go('/academy');
         break;
       case 4:
-        context.go('/account');
+        context.go('/search');
         break;
     }
   }
