@@ -8,7 +8,6 @@ import 'package:tuntax/screens/main/chat_screen.dart';
 import 'package:tuntax/screens/main/home_screen.dart';
 import 'package:tuntax/screens/main/search_screen.dart';
 import 'package:tuntax/screens/main/article_screen.dart';
-import 'package:tuntax/screens/misc/date_screen.dart';
 import 'package:tuntax/screens/misc/notification_screen.dart';
 import 'package:tuntax/screens/signup_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
