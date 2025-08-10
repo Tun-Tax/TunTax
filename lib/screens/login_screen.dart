@@ -5,15 +5,18 @@ import 'package:tuntax/widgets/background.dart';
 import 'package:tuntax/widgets/custom_text_field.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tuntax/services/auth_service.dart';
+import 'package:firebase_auth/firebase_auth.dart'; // Import for FirebaseAuthException
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends ConsumerState<LoginScreen> {
   final _formKey = GlobalKey<FormBuilderState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -25,6 +28,36 @@ class _LoginScreenState extends State<LoginScreen> {
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
+  }
+
+  Future<void> _signIn() async {
+    if (_formKey.currentState?.saveAndValidate() ?? false) {
+      final authService = ref.read(authServiceProvider);
+      try {
+        await authService.signInWithEmailAndPassword(
+          _emailController.text,
+          _passwordController.text,
+        );
+        // On successful login, the authStateProvider will update and redirect
+        // No explicit navigation needed here as it's handled by the router's redirect logic
+      } on FirebaseAuthException catch (e) {
+        String message;
+        if (e.code == 'user-not-found') {
+          message = 'No user found for that email.';
+        } else if (e.code == 'wrong-password') {
+          message = 'Wrong password provided for that user.';
+        } else {
+          message = e.message ?? 'An unknown error occurred.';
+        }
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(message)),
+        );
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('An unexpected error occurred: $e')),
+        );
+      }
+    }
   }
 
   @override
@@ -264,19 +297,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           const SizedBox(height: 8.0),
                           ElevatedButton(
-                            onPressed: () {
-                              if (_formKey.currentState?.saveAndValidate() ??
-                                  false) {
-                                debugPrint(
-                                  'Email: ${_formKey.currentState?.fields['email']?.value}',
-                                );
-                                debugPrint(
-                                  'Password: ${_formKey.currentState?.fields['password']?.value}',
-                                );
-                                debugPrint('Remember Me: $_rememberMe');
-                                debugPrint('Login button pressed');
-                              }
-                            },
+                            onPressed: _signIn,
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(
                                 0xFF4285F4,

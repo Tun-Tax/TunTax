@@ -3,20 +3,67 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:tuntax/services/auth_service.dart';
 import 'package:tuntax/widgets/background.dart';
 import 'package:tuntax/widgets/custom_date_time_picker.dart';
 import 'package:tuntax/widgets/custom_text_field.dart';
 
-class SignupScreen extends StatefulWidget {
+class SignupScreen extends ConsumerStatefulWidget {
   const SignupScreen({super.key});
 
   @override
-  State<SignupScreen> createState() => _SignupScreenState();
+  ConsumerState<SignupScreen> createState() => _SignupScreenState();
 }
 
-class _SignupScreenState extends State<SignupScreen> {
+class _SignupScreenState extends ConsumerState<SignupScreen> {
   final _formKey = GlobalKey<FormBuilderState>();
   bool _isPasswordVisible = false;
+
+  final TextEditingController _fullNameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _fullNameController.dispose();
+    _emailController.dispose();
+    _phoneController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _signUp() async {
+    if (_formKey.currentState?.saveAndValidate() ?? false) {
+      final authService = ref.read(authServiceProvider);
+      try {
+        await authService.signUpWithEmailAndPassword(
+          _emailController.text,
+          _passwordController.text,
+        );
+        // On successful signup, the authStateProvider will update and redirect
+        // No explicit navigation needed here as it's handled by the router's redirect logic
+      } on FirebaseAuthException catch (e) {
+        String message;
+        if (e.code == 'weak-password') {
+          message = 'The password provided is too weak.';
+        } else if (e.code == 'email-already-in-use') {
+          message = 'The account already exists for that email.';
+        } else {
+          message = e.message ?? 'An unknown error occurred.';
+        }
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(message)),
+        );
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('An unexpected error occurred: $e')),
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +147,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           CustomTextField(
                             name: 'full_name',
                             labelText: 'Nama Lengkap',
-                            controller: TextEditingController(),
+                            controller: _fullNameController,
                             validator: FormBuilderValidators.compose([
                               FormBuilderValidators.required(
                                 errorText: 'Nama lengkap tidak boleh kosong',
@@ -115,7 +162,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           CustomTextField(
                             name: 'email',
                             labelText: 'Email',
-                            controller: TextEditingController(),
+                            controller: _emailController,
                             validator: FormBuilderValidators.compose([
                               FormBuilderValidators.required(
                                 errorText: 'Email tidak boleh kosong',
@@ -137,7 +184,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           CustomTextField(
                             name: 'phone',
                             labelText: 'Nomor telepon',
-                            controller: TextEditingController(),
+                            controller: _phoneController,
                             keyboardType: TextInputType.number,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
@@ -156,7 +203,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           CustomTextField(
                             name: 'password',
                             labelText: 'Buat Kata Sandi',
-                            controller: TextEditingController(),
+                            controller: _passwordController,
                             isPassword: true,
                             obscureText: !_isPasswordVisible,
                             onVisibilityToggle: () {
@@ -189,11 +236,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               ],
                             ),
                             child: ElevatedButton(
-                              onPressed: () {
-                                //if (_formKey.currentState?.saveAndValidate() ?? false) {
-                                context.go('/home');
-                                //}
-                              },
+                              onPressed: _signUp,
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.transparent,
                                 shadowColor: Colors.transparent,
