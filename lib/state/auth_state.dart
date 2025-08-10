@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:tuntax/services/auth_service.dart'; // Will create this next
+import 'package:tuntax/services/auth_service.dart';
+import 'package:tuntax/utils/app_preferences.dart';
 
 enum AuthState {
   initial,
@@ -21,6 +22,10 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
     });
   }
 
+  Future<void> completeFirstTimeUserExperience() async {
+    await AppPreferences.setIsFirstTimeUser(false);
+  }
+
   // Methods to manually trigger state changes if needed (e.g., after login/logout)
   void setAuthenticated() {
     state = AuthState.authenticated;
@@ -32,6 +37,11 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
 }
 
 final authStateProvider = StateNotifierProvider<AuthStateNotifier, AuthState>((ref) {
-  final authService = ref.watch(authServiceProvider); // Will create this next
+  final authService = ref.watch(authServiceProvider);
   return AuthStateNotifier(authService);
+});
+
+final userInfoProvider = StreamProvider<User?>((ref) {
+  final authService = ref.watch(authServiceProvider);
+  return authService.authStateChanges();
 });

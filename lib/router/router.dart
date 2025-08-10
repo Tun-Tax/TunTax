@@ -117,7 +117,6 @@ final goRouterProvider = Provider<GoRouter>((ref) {
     redirect: (context, state) async {
       final isFirstTimeUser = await isFirstTimeUserFuture;
       final isAuthenticated = authState == AuthState.authenticated;
-      final isUnauthenticated = authState == AuthState.unauthenticated;
 
       final goingToLogin = state.matchedLocation == '/login';
       final goingToSignup = state.matchedLocation == '/signup';

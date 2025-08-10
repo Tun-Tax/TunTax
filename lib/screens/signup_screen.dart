@@ -42,6 +42,7 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
         await authService.signUpWithEmailAndPassword(
           _emailController.text,
           _passwordController.text,
+          _fullNameController.text,
         );
         // On successful signup, the authStateProvider will update and redirect
         // No explicit navigation needed here as it's handled by the router's redirect logic
@@ -54,13 +55,17 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
         } else {
           message = e.message ?? 'An unknown error occurred.';
         }
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(message)),
-        );
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(message)),
+          );
+        }
       } catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('An unexpected error occurred: $e')),
-        );
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('An unexpected error occurred: $e')),
+          );
+        }
       }
     }
   }

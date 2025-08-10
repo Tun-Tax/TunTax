@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tuntax/utils/app_preferences.dart';
+import 'package:tuntax/state/auth_state.dart';
 
 class LandingScreen extends ConsumerWidget {
   const LandingScreen({super.key});
@@ -103,8 +103,12 @@ class LandingScreen extends ConsumerWidget {
               ),
               child: ElevatedButton(
                 onPressed: () async {
-                  await AppPreferences.setIsFirstTimeUser(false);
-                  context.go('/login');
+                  await ref
+                      .read(authStateProvider.notifier)
+                      .completeFirstTimeUserExperience();
+                  if (context.mounted) {
+                    context.go('/login');
+                  }
                 },
                 style: ButtonStyle(
                   padding: WidgetStateProperty.all(
