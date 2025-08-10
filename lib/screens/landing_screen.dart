@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tuntax/providers/auth_providers.dart';
 
-class LandingScreen extends StatelessWidget {
+class LandingScreen extends ConsumerWidget {
   const LandingScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final authService = ref.watch(authServiceProvider);
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(top: 72, left: 24, right: 24),
@@ -100,7 +103,8 @@ class LandingScreen extends StatelessWidget {
                     : [],
               ),
               child: ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
+                  await authService.setFirstTime();
                   context.go('/login');
                 },
                 style: ButtonStyle(

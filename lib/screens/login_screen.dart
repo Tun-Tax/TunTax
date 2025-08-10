@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tuntax/providers/auth_providers.dart';
 import 'package:tuntax/widgets/background.dart';
 import 'package:tuntax/widgets/custom_text_field.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends ConsumerState<LoginScreen> {
   final _formKey = GlobalKey<FormBuilderState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -29,6 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final authService = ref.watch(authServiceProvider);
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus(); // Dismiss keyboard on tap outside
@@ -92,8 +95,16 @@ class _LoginScreenState extends State<LoginScreen> {
                           const SizedBox(height: 24.0),
                           // Google Button
                           OutlinedButton(
-                            onPressed: () {
-                              debugPrint('Sign in with Google');
+                            onPressed: () async {
+                              try {
+                                await authService.signInWithGoogle();
+                              } catch (e) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(e.toString()),
+                                  ),
+                                );
+                              }
                             },
                             style: OutlinedButton.styleFrom(
                               foregroundColor: Colors.black,
@@ -101,7 +112,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8.0),
                               ),
-                              padding: const EdgeInsets.symmetric(vertical: 12.0),
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 12.0),
                               minimumSize: const Size(double.infinity, 0),
                             ),
                             child: Row(
@@ -134,7 +146,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8.0),
                               ),
-                              padding: const EdgeInsets.symmetric(vertical: 12.0),
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 12.0),
                               minimumSize: const Size(double.infinity, 0),
                             ),
                             child: Row(
@@ -219,7 +232,6 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ]),
                           ),
-      
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -264,17 +276,22 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           const SizedBox(height: 8.0),
                           ElevatedButton(
-                            onPressed: () {
+                            onPressed: () async {
                               if (_formKey.currentState?.saveAndValidate() ??
                                   false) {
-                                debugPrint(
-                                  'Email: ${_formKey.currentState?.fields['email']?.value}',
-                                );
-                                debugPrint(
-                                  'Password: ${_formKey.currentState?.fields['password']?.value}',
-                                );
-                                debugPrint('Remember Me: $_rememberMe');
-                                debugPrint('Login button pressed');
+                                try {
+                                  await authService
+                                      .signInWithEmailAndPassword(
+                                    _emailController.text,
+                                    _passwordController.text,
+                                  );
+                                } catch (e) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(e.toString()),
+                                    ),
+                                  );
+                                }
                               }
                             },
                             style: ElevatedButton.styleFrom(
@@ -284,7 +301,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8.0),
                               ),
-                              padding: const EdgeInsets.symmetric(vertical: 16.0),
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 16.0),
                               minimumSize: const Size(double.infinity, 0),
                             ),
                             child: Text(
@@ -296,7 +314,6 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                           ),
-      
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -304,7 +321,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 'Belum memiliki akun?',
                                 style: GoogleFonts.poppins(
                                   fontSize: 12,
-                                  color: const Color.fromARGB(255, 115, 114, 116),
+                                  color:
+                                      const Color.fromARGB(255, 115, 114, 116),
                                 ),
                               ),
                               TextButton(

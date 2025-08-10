@@ -1,25 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:tuntax/providers/auth_providers.dart';
 import 'package:tuntax/widgets/background.dart';
 import 'package:tuntax/widgets/custom_date_time_picker.dart';
 import 'package:tuntax/widgets/custom_text_field.dart';
 
-class SignupScreen extends StatefulWidget {
+class SignupScreen extends ConsumerStatefulWidget {
   const SignupScreen({super.key});
 
   @override
-  State<SignupScreen> createState() => _SignupScreenState();
+  ConsumerState<SignupScreen> createState() => _SignupScreenState();
 }
 
-class _SignupScreenState extends State<SignupScreen> {
+class _SignupScreenState extends ConsumerState<SignupScreen> {
   final _formKey = GlobalKey<FormBuilderState>();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
   bool _isPasswordVisible = false;
 
   @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final authService = ref.watch(authServiceProvider);
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus(); // Dismiss keyboard on tap outside
@@ -115,7 +127,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           CustomTextField(
                             name: 'email',
                             labelText: 'Email',
-                            controller: TextEditingController(),
+                            controller: _emailController,
                             validator: FormBuilderValidators.compose([
                               FormBuilderValidators.required(
                                 errorText: 'Email tidak boleh kosong',
@@ -156,7 +168,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           CustomTextField(
                             name: 'password',
                             labelText: 'Buat Kata Sandi',
-                            controller: TextEditingController(),
+                            controller: _passwordController,
                             isPassword: true,
                             obscureText: !_isPasswordVisible,
                             onVisibilityToggle: () {
@@ -189,10 +201,23 @@ class _SignupScreenState extends State<SignupScreen> {
                               ],
                             ),
                             child: ElevatedButton(
-                              onPressed: () {
-                                //if (_formKey.currentState?.saveAndValidate() ?? false) {
-                                context.go('/home');
-                                //}
+                              onPressed: () async {
+                                if (_formKey.currentState?.saveAndValidate() ??
+                                    false) {
+                                  try {
+                                    await authService
+                                        .createUserWithEmailAndPassword(
+                                      _emailController.text,
+                                      _passwordController.text,
+                                    );
+                                  } catch (e) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(e.toString()),
+                                      ),
+                                    );
+                                  }
+                                }
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.transparent,
