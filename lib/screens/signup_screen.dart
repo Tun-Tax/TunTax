@@ -25,11 +25,6 @@ class _SignupScreenState extends State<SignupScreen> {
       },
       child: Scaffold(
         extendBodyBehindAppBar: true,
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          scrolledUnderElevation: 0,
-        ),
         body: Stack(
           children: [
             // Background gradient

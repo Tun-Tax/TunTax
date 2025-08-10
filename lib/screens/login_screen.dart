@@ -35,38 +35,6 @@ class _LoginScreenState extends State<LoginScreen> {
       },
       child: Scaffold(
         extendBodyBehindAppBar: true,
-        appBar: AppBar(
-          centerTitle: true,
-          title: ShaderMask(
-            shaderCallback: (Rect bounds) {
-              return const LinearGradient(
-                colors: [Color(0xFF4983F6), Color(0xFFC175F5)],
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-              ).createShader(bounds);
-            },
-            blendMode: BlendMode.srcIn,
-            child: Text(
-              'Masuk',
-              style: GoogleFonts.poppins(
-                fontSize: 26,
-                fontWeight: FontWeight.w700,
-                letterSpacing: -0.52,
-                height: 1.3,
-                shadows: [
-                  Shadow(
-                    offset: Offset(1.0, 1.2),
-                    blurRadius: 3.0,
-                    color: Colors.black.withAlpha(77),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          scrolledUnderElevation: 0,
-        ),
         body: Background(
           child: SafeArea(
             child: Center(
@@ -86,6 +54,33 @@ class _LoginScreenState extends State<LoginScreen> {
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                          ShaderMask(
+                            shaderCallback: (Rect bounds) {
+                              return const LinearGradient(
+                                colors: [Color(0xFF4983F6), Color(0xFFC175F5)],
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                              ).createShader(bounds);
+                            },
+                            blendMode: BlendMode.srcIn,
+                            child: Text(
+                              'Masuk',
+                              style: GoogleFonts.poppins(
+                                fontSize: 26,
+                                fontWeight: FontWeight.w700,
+                                letterSpacing: -0.52,
+                                height: 1.3,
+                                shadows: [
+                                  Shadow(
+                                    offset: Offset(1.0, 1.2),
+                                    blurRadius: 3.0,
+                                    color: Colors.black.withAlpha(77),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 8.0),
                           Text(
                             'Masuk ke akun atau buat akun baru untuk menggunakan aplikasi',
                             textAlign: TextAlign.center,
