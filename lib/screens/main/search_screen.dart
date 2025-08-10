@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tuntax/widgets/background.dart';
 import 'package:tuntax/widgets/scaffold_with_app_bar.dart';
-
 import 'package:tuntax/widgets/search_filter_buttons.dart';
+import 'package:tuntax/widgets/person_card_widget.dart'; // Import the new widget
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
@@ -31,8 +31,13 @@ class SearchScreen extends StatelessWidget {
               const SizedBox(height: 16), // Add some space
               SearchFilterButtons(onFilterChanged: _onFilterChanged),
               const SizedBox(height: 16), // Add some space
-              const Center(
-                child: Text('Search Screen'),
+              // Use the new PersonCardWidget here
+              const PersonCardWidget(
+                imageUrl: 'assets/images/person/person_1.png',
+                name: 'Jihan Dwi Athanaya, S. Kom',
+                description: 'lorem ipsum lorem ipsum lorem ipsum',
+                location: 'Pondok Indah',
+                rating: 4.5,
               ),
             ],
           ),
