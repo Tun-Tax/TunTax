@@ -25,52 +25,51 @@ class UserProfileCard extends ConsumerWidget {
             backgroundColor: const Color(0xFFE0D6FF),
             child: Text(
               user.displayName?.substring(0, 1).toUpperCase() ?? 'A',
-              style: const TextStyle(
-                fontSize: 20,
-                color: Color(0xFF4A00E0),
-              ),
+              style: const TextStyle(fontSize: 20, color: Color(0xFF4A00E0)),
             ),
           ),
           const SizedBox(width: 8),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                user.displayName ?? 'No Name',
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+          Expanded(
+            child: Column(
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      user.displayName ?? 'No Name',
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      'bergabung $formattedDate',
+                      style: const TextStyle(color: Colors.black54, fontSize: 12),
+                    ),
+                  ],
                 ),
-              ),
-              Text(
-                user.email ?? 'No Email',
-                style: const TextStyle(
-                  color: Colors.black54,
+                const SizedBox(height: 4), // Added vertical spacing
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      user.email ?? 'No Email',
+                      style: const TextStyle(color: Colors.black54),
+                    ),
+                    CustomOutlinedButton(
+                      onPressed: () async {
+                        await authService.signOut();
+                      },
+                      text: 'Log Out',
+                      icon: Icons.logout,
+                    ),
+                  ],
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-          const Spacer(),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text(
-                'bergabung $formattedDate',
-                style: const TextStyle(
-                  color: Colors.black54,
-                  fontSize: 12,
-                ),
-              ),
-              const SizedBox(height: 8),
-              CustomOutlinedButton(
-                onPressed: () async {
-                  await authService.signOut();
-                },
-                text: 'Log Out',
-                icon: Icons.logout,
-              ),
-            ],
-          )
         ],
       ),
     );
