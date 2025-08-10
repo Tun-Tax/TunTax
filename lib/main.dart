@@ -28,10 +28,16 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         textSelectionTheme:
             const TextSelectionThemeData(cursorColor: Colors.black),
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFFC175F5),
-          primary: const Color(0xFFC175F5),
-          secondary: const Color(0xFF4983F6),
+        colorScheme: const ColorScheme(
+          brightness: Brightness.light,
+          primary: Color(0xFF4983F6),
+          onPrimary: Colors.white,
+          secondary: Color(0xFFC175F5),
+          onSecondary: Colors.white,
+          error: Colors.red,
+          onError: Colors.white,
+          surface: Colors.white,
+          onSurface: Colors.black,
         ),
         scaffoldBackgroundColor: Colors.white,
         useMaterial3: true,
@@ -40,7 +46,7 @@ class MyApp extends StatelessWidget {
             TargetPlatform.android: FadeForwardsPageTransitionsBuilder(),
             TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
           },
-        ),
+        ), dialogTheme: DialogThemeData(backgroundColor: Colors.white),
       ),
       routerConfig: router,
       debugShowCheckedModeBanner: false,
