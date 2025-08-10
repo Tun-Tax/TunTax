@@ -6,12 +6,14 @@ class AuthService {
 
   AuthService(this._firebaseAuth);
 
-  Future<UserCredential> signUpWithEmailAndPassword(String email, String password) async {
+  Future<UserCredential> signUpWithEmailAndPassword(
+      String email, String password, String displayName) async {
     try {
       final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
+      await userCredential.user?.updateDisplayName(displayName);
       return userCredential;
     } on FirebaseAuthException catch (e) {
       throw e; // Re-throw the exception for UI to handle
